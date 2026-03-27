@@ -520,3 +520,27 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
+// Demo offer: update WhatsApp link based on selected plan
+const demoRadios = document.querySelectorAll('input[name="demoPlan"]');
+const whatsappDemoBtn = document.getElementById('whatsappDemoBtn');
+
+function updateWhatsAppLink() {
+  let selectedPlan = "Essential ($2,500)";
+  for (let radio of demoRadios) {
+    if (radio.checked) {
+      selectedPlan = radio.value;
+      break;
+    }
+  }
+  const message = `Hello LibSu Wed Studio,%0A%0AI'd like to request a **5-day demo** for the **${selectedPlan}** plan. Please send details.%0A%0AThank you!`;
+  whatsappDemoBtn.href = `https://wa.me/27791596144?text=${message}`;
+}
+
+// Set initial link and add event listeners
+if (demoRadios.length && whatsappDemoBtn) {
+  updateWhatsAppLink();
+  demoRadios.forEach(radio => {
+    radio.addEventListener('change', updateWhatsAppLink);
+  });
+}
