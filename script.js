@@ -95,3 +95,25 @@ window.addEventListener('scroll', () => {
     hero.style.background = "#F8F8F8";
   }
 });
+
+const demoRadios = document.querySelectorAll('input[name="demoPlan"]');
+const whatsappDemoBtn = document.getElementById('whatsappDemoBtn');
+
+function updateWhatsAppLink() {
+  let selectedPlan = "Essential ($2,500)";
+  for (let radio of demoRadios) {
+    if (radio.checked) {
+      selectedPlan = radio.value;
+      break;
+    }
+  }
+  const message = `Hello LibSu Wed Studio,%0A%0AI'd like to request a **5-day demo** for the **${selectedPlan}** plan. Please send details.%0A%0AThank you!`;
+  whatsappDemoBtn.href = `https://wa.me/27791596144?text=${message}`;
+}
+
+if (demoRadios.length && whatsappDemoBtn) {
+  updateWhatsAppLink();
+  demoRadios.forEach(radio => {
+    radio.addEventListener('change', updateWhatsAppLink);
+  });
+}
